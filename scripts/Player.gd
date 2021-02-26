@@ -39,6 +39,13 @@ var left = Input.is_action_pressed("move_left")
 var jump = Input.is_action_just_pressed("jump")
 var sprint = Input.is_action_pressed("sprint")
 
+func teleport_to(to):
+	self.position = to
+
+func out_of_bounds_teleport():
+	if self.position.y >= 700:
+		teleport_to(Vector2(self.position.x, -100))
+
 func update_acting_vars():
 	acting_jump_height = jump_height * jump_height_mul
 	acting_acceleration = acceleration * acceleration_mul
@@ -95,6 +102,7 @@ func performJump():
 			coyote_timer.stop()
 
 func _physics_process(delta):
+	out_of_bounds_teleport()
 	velocity.y += acting_gravity * delta
 	input()
 	applyFriction()

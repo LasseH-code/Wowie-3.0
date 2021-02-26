@@ -48,6 +48,7 @@ shader_param/scanline_opacity = 0.15
 current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource( 2 )
