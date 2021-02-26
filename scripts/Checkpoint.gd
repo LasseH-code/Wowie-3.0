@@ -11,6 +11,6 @@ func _ready():
 	checkpoint_area.monitoring = true
 
 func _on_Area2D_body_entered(body):
-	print (body)
+	#print (body)
 	if body == player:
 		emit_signal("checkpoint", id, self.position.x)

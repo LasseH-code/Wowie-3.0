@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/fonts/title_super.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scripts/Pause_menu.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+ 
+void fragment()
+{
+    COLOR = texture(TEXTURE, UV);
+    float lum = (COLOR.r+COLOR.g+COLOR.b)/3.0;
+    COLOR.xyz = vec3(lum);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[node name="PauseMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+margin_left = 24.0
+margin_top = 192.0
+margin_right = 152.0
+margin_bottom = 260.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="Button" parent="ButtonContainer"]
+margin_right = 128.0
+margin_bottom = 20.0
+text = "Resume"
+
+[node name="Options" type="Button" parent="ButtonContainer"]
+margin_top = 24.0
+margin_right = 128.0
+margin_bottom = 44.0
+disabled = true
+text = "Options"
+
+[node name="MainMenu" type="Button" parent="ButtonContainer"]
+margin_top = 48.0
+margin_right = 128.0
+margin_bottom = 68.0
+text = "MainMenu"
+
+[node name="Pause" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 104.0
+margin_right = 223.0
+margin_bottom = 202.0
+custom_fonts/font = ExtResource( 1 )
+text = "PAUSE"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="ButtonContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="ButtonContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="ButtonContainer/MainMenu" to="." method="_on_MainMenu_pressed"]

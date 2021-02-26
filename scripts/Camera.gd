@@ -5,6 +5,7 @@ const MAX_X = 2000
 
 export onready var x_follow_target = $"../Player"
 onready var crt = $"CanvasLayer/ColorRect"
+onready var pause_menu = $"HUD/PauseMenu"
 
 var target_last_tick = Vector2(0, 0)
 var relative_target_position = Vector2()
@@ -28,8 +29,8 @@ func update_mouse_position(event):
 		relative_mouse_position = event.relative
 
 func _input(event):
-	#update_mouse_position(event)
-	pass
+	if Input.is_action_pressed("ui_cancel"):
+		pause_menu.visible = !pause_menu.visible
 
 # procsss_input and process_movement not suited for this unless heavily modded
 func process_input(delta):

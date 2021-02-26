@@ -34,6 +34,7 @@ var velocity = Vector2(0, 0)
 var has_friction = false
 var do_coyote_jump = false
 var dead = false
+var paused = false
 
 var right = Input.is_action_pressed("move_right")
 var left = Input.is_action_pressed("move_left")
@@ -45,11 +46,14 @@ var respawn_coordinates_x
 var y_out_of_screen = Vector2(-100, 700)
 export var accept_previous_checkpoints = true
 
+func _on_resume():
+	paused = false
+
 func _on_kill():
 	dead = true
 
 func _on_checkpoint(id_data, x_data):
-	print(str(id_data) + ", " + str(x_data))
+	#print(str(id_data) + ", " + str(x_data))
 	if id_data != checkpoint_id and id_data != -1:
 		if id_data < checkpoint_id and !accept_previous_checkpoints:
 			pass
@@ -98,7 +102,7 @@ func input():
 	left = Input.is_action_pressed("move_left")
 	
 	has_friction = false
-	if dead != true:
+	if dead != true and paused != true:
 		if right and sprint:
 			velocity.x += acting_sprint_acceleration
 			velocity.x = min(velocity.x, acting_max_sprint_speed)
@@ -113,8 +117,6 @@ func input():
 			velocity.x = max(velocity.x, -acting_max_speed)
 		if !left and !right:
 			has_friction = true
-		if Input.is_action_just_pressed("ui_cancel"):
-			dead = true
 
 func applyFriction():
 	if is_on_floor():
@@ -135,6 +137,10 @@ func performJump():
 			velocity.y = -acting_jump_height
 			coyote_timer.stop()
 
+func _input(_event):
+	if Input.is_action_pressed("ui_cancel"):
+		paused = !paused
+
 func _physics_process(delta):
 	out_of_bounds_teleport()
 	velocity.y += acting_gravity * delta
@@ -142,7 +148,7 @@ func _physics_process(delta):
 	applyFriction()
 	performJump()
 	velocity.normalized()
-	if dead != true:
+	if dead != true and paused != true:
 		velocity = move_and_slide(velocity, UP)
-	else:
+	elif dead:
 		dead()
