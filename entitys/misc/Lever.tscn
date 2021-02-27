@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/Lever.gd" type="Script" id=1]
+[ext_resource path="res://imports/fonts/impact.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="QuadMesh" id=1]
+size = Vector2( 18, 48 )
+
+[sub_resource type="QuadMesh" id=2]
+size = Vector2( 38, 5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 48, 56 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 45
+font_data = ExtResource( 2 )
+
+[node name="Lever" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="LeverWall" type="MeshInstance2D" parent="."]
+mesh = SubResource( 1 )
+
+[node name="LeverJoint" type="Node2D" parent="."]
+rotation = -0.663225
+
+[node name="LeverLever" type="MeshInstance2D" parent="LeverJoint"]
+position = Vector2( 24, 4.19629e-06 )
+mesh = SubResource( 2 )
+
+[node name="InteractionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2( 40, 0 )
+shape = SubResource( 3 )
+
+[node name="InputPrompt" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="E" type="Label" parent="InputPrompt"]
+margin_left = 48.0
+margin_top = -88.0
+margin_right = 179.0
+margin_bottom = -32.0
+custom_fonts/font = SubResource( 4 )
+text = "Press E"
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_InteractionArea_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_InteractionArea_body_exited"]

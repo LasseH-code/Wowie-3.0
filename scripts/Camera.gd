@@ -3,9 +3,12 @@ extends Camera2D
 const MIN_X = 590
 const MAX_X = 2000 
 
-export onready var x_follow_target = $"../Player"
+export(NodePath) onready var x_follow_target = $"../Player"
 onready var crt = $"CanvasLayer/ColorRect"
 onready var pause_menu = $"HUD/PauseMenu"
+onready var win_splashscreen = $"HUD/WinSplashscreen"
+export(NodePath) onready var player = $"../Player"
+export(String) var next_level
 
 var target_last_tick = Vector2(0, 0)
 var relative_target_position = Vector2()
@@ -16,6 +19,14 @@ var relative_mouse_position = Vector2()
 const SPEED_MULTIPLYER = 1.0
 const ACCELERATION = 5.0
 const DECELLERATION = 5.0
+var won = false
+
+signal player(player_data)
+signal next_level(next_level_data)
+
+func _on_win():
+	won = true
+	win_splashscreen.show()
 
 func _physics_process(_delta):
 	if x_follow_target.position.x >= MIN_X and x_follow_target.position.x <= MAX_X:
@@ -29,8 +40,9 @@ func update_mouse_position(event):
 		relative_mouse_position = event.relative
 
 func _input(event):
-	if Input.is_action_pressed("ui_cancel"):
-		pause_menu.visible = !pause_menu.visible
+	if won != true:
+		if Input.is_action_just_released("ui_cancel"):
+			pause_menu.visible = !pause_menu.visible
 
 # procsss_input and process_movement not suited for this unless heavily modded
 func process_input(delta):
@@ -81,3 +93,7 @@ func process_movement(delta):
 
 func _ready():
 	target_last_tick = x_follow_target.position
+	connect("player", pause_menu, "_on_player")
+	emit_signal("player", player)
+	connect("next_level", win_splashscreen, "_on_next_level")
+	emit_signal("next_level", next_level)

@@ -1,22 +1,28 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/enviorment/TestTileset.tres" type="TileSet" id=1]
 [ext_resource path="res://entitys/playable/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entitys/misc/Camera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entitys/misc/Checkpoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entitys/misc/Spike_wall.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entitys/misc/Goal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entitys/misc/Lever.tscn" type="PackedScene" id=7]
 
 [node name="Test World" type="Node2D"]
 position = Vector2( 18.8775, 81.1732 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 261.122, 526.827 )
+position = Vector2( 277.122, -105.173 )
 gravity = 600.0
+camera = NodePath("../Camera")
 
 [node name="Camera" parent="." instance=ExtResource( 3 )]
 position = Vector2( 590, 288.476 )
 current = true
 zoom = Vector2( 1.2, 1.2 )
+x_follow_target = NodePath("../Player")
+player = NodePath("../Player")
+next_level = "res://_sc/ui/Main_menu.tscn"
 
 [node name="CanvasLayer" parent="Camera" index="0"]
 scale = Vector2( 1.2, 1.2 )
@@ -37,21 +43,38 @@ rect_scale = Vector2( 1.14507, 1.20527 )
 [node name="Checkpoints" type="Node2D" parent="."]
 
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource( 4 )]
-position = Vector2( 837.122, 326.827 )
+position = Vector2( 845.122, 550.827 )
+player = NodePath("../../Player")
 id = 0
 
 [node name="Checkpoint2" parent="Checkpoints" instance=ExtResource( 4 )]
-position = Vector2( 1237.12, 326.827 )
+position = Vector2( 1245.12, 550.827 )
+player = NodePath("../../Player")
 id = 1
 
 [node name="Checkpoint3" parent="Checkpoints" instance=ExtResource( 4 )]
-position = Vector2( 1613.12, 326.827 )
+position = Vector2( 1597.12, 550.827 )
+player = NodePath("../../Player")
 id = 2
 
 [node name="Spikes" type="Node2D" parent="."]
 
 [node name="Spike Wall" parent="Spikes" instance=ExtResource( 5 )]
 position = Vector2( 1029.12, 494.827 )
+player = NodePath("../../Player")
+
+[node name="Goal" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1989.12, 510.827 )
+player = NodePath("../Player")
+camera = NodePath("../Camera")
+
+[node name="Levers" type="Node2D" parent="."]
+position = Vector2( 117.122, 518.827 )
+
+[node name="Lever" parent="Levers" instance=ExtResource( 7 )]
+position = Vector2( -7.9995, -0.000244141 )
+player = NodePath("../../Player")
+logic_reciever = NodePath("../../Checkpoints/Checkpoint")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 72.1225, -17.1732 )

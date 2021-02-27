@@ -45,6 +45,11 @@ var checkpoint_id = -1
 var respawn_coordinates_x
 var y_out_of_screen = Vector2(-100, 700)
 export var accept_previous_checkpoints = true
+export(NodePath) onready var camera = $"../Camera"
+var win = false
+
+func _on_win():
+	win = true
 
 func _on_resume():
 	paused = false
@@ -102,7 +107,7 @@ func input():
 	left = Input.is_action_pressed("move_left")
 	
 	has_friction = false
-	if dead != true and paused != true:
+	if dead != true and paused != true and win != true:
 		if right and sprint:
 			velocity.x += acting_sprint_acceleration
 			velocity.x = min(velocity.x, acting_max_sprint_speed)
@@ -132,13 +137,14 @@ func applyFriction():
 		do_coyote_jump = false
 
 func performJump():
-	jump = Input.is_action_just_pressed("jump")
+	if dead != true and paused != true and win != true:
+		jump = Input.is_action_just_pressed("jump")
 	if jump && is_on_floor() || jump && coyote_timer.time_left > 0.0:
 			velocity.y = -acting_jump_height
 			coyote_timer.stop()
 
 func _input(_event):
-	if Input.is_action_pressed("ui_cancel"):
+	if Input.is_action_just_released("ui_cancel"):
 		paused = !paused
 
 func _physics_process(delta):
