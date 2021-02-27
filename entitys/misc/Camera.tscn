@@ -9,8 +9,8 @@
 shader = ExtResource( 4 )
 shader_param/scan_line_count = 250.0
 shader_param/r_offset = 0.0
-shader_param/g_offset = 0.7
-shader_param/b_offset = -0.8
+shader_param/g_offset = 0.0
+shader_param/b_offset = 0.0
 shader_param/scanline_opacity = 0.15
 
 [node name="Camera" type="Camera2D"]

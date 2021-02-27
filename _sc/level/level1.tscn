@@ -205,7 +205,6 @@ scale = Vector2( 1.2, 1.2 )
 transform = Transform2D( 1.2, 0, 0, 1.2, 0, 0 )
 
 [node name="ColorRect" parent="Camera/CanvasLayer" index="0"]
-visible = false
 anchor_left = 0.0138263
 anchor_top = 0.0734125
 anchor_right = 1.01383

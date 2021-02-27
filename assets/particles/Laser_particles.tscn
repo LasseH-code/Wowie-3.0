@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="LaserParticles" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 18
+emission_shape = 2
+emission_rect_extents = Vector2( 1, 32 )
+spread = 180.0
+gravity = Vector2( 0, 36.196 )
+initial_velocity = 17.0
+initial_velocity_random = 0.27
+angular_velocity = 152.58
+angular_velocity_random = 0.33
+linear_accel = -1.58
+scale_amount = 1.05
+color = Color( 0.580392, 0.231373, 0.231373, 1 )

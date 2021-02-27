@@ -51,6 +51,9 @@ __meta__ = {
 margin_right = 150.0
 margin_bottom = 20.0
 text = "Continue"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Replay" type="Button" parent="ButtonContainer"]
 margin_top = 24.0

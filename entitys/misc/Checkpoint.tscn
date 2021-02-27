@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Checkpoint.gd" type="Script" id=1]
 [ext_resource path="res://assets/misc/checkpoint.png" type="Texture" id=2]
+[ext_resource path="res://assets/particles/Checkpoint_particles.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 32 )
@@ -28,4 +29,9 @@ position = Vector2( 0, -24 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
+[node name="CheckpointParticles" parent="." instance=ExtResource( 3 )]
+position = Vector2( -6.26762, -0.157494 )
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+
+[editable path="CheckpointParticles"]

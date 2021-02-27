@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/misc/LaserTilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/Laser.gd" type="Script" id=2]
+[ext_resource path="res://assets/particles/Laser_particles.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 64 )
@@ -24,6 +25,9 @@ scale = Vector2( 0.5, 0.5 )
 position = Vector2( 15.058, -64 )
 scale = Vector2( 0.326, 1 )
 shape = SubResource( 1 )
+
+[node name="LaserParticles" parent="LaserOn" instance=ExtResource( 3 )]
+position = Vector2( 8, -32 )
 
 [node name="LaserOff" type="TileMap" parent="."]
 visible = false

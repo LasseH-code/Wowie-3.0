@@ -18,4 +18,4 @@ func _on_Options_pressed():
 	pass # Replace with function body.
 
 func _on_TestWorld_pressed():
-	get_tree().change_scene("res://_sc/test/test_world.tscn")
+	get_tree().change_scene("res://_sc/level/level1.tscn")
