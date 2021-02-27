@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Win_splashscreen.gd" type="Script" id=1]
 [ext_resource path="res://imports/fonts/impact.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/misc/Laterne, Laterne,Sonne, Mond und Sterne..png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -23,9 +24,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -179.0
-margin_top = -160.0
+margin_top = -79.619
 margin_right = 179.0
-margin_bottom = -61.9999
+margin_bottom = 18.3814
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.827451, 0.87451, 0, 1 )
 text = "YOU WON!!!"
@@ -39,29 +40,50 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -75.0
-margin_top = -60.0
-margin_right = 75.0
-margin_bottom = -20.0
+margin_top = 27.997
+margin_right = 75.0001
+margin_bottom = 95.9971
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Continue" type="Button" parent="ButtonContainer"]
-margin_right = 149.0
+margin_right = 150.0
 margin_bottom = 20.0
 text = "Continue"
 
 [node name="Replay" type="Button" parent="ButtonContainer"]
 margin_top = 24.0
-margin_right = 149.0
+margin_right = 150.0
 margin_bottom = 44.0
 text = "Replay"
 
 [node name="MainMenu" type="Button" parent="ButtonContainer"]
 margin_top = 48.0
-margin_right = 149.0
+margin_right = 150.0
 margin_bottom = 68.0
 text = "Main Menu"
+
+[node name="Node2D" type="Node2D" parent="ButtonContainer"]
+
+[node name="Sprite" type="Sprite" parent="ButtonContainer/Node2D"]
+position = Vector2( -101, -207.997 )
+rotation = -0.331613
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="ButtonContainer/Node2D"]
+visible = false
+position = Vector2( 75, -239.997 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3" type="Sprite" parent="ButtonContainer/Node2D"]
+visible = false
+position = Vector2( 251, -207.997 )
+rotation = 0.331613
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
 
 [connection signal="pressed" from="ButtonContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="ButtonContainer/Replay" to="." method="_on_Replay_pressed"]

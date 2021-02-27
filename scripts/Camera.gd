@@ -19,16 +19,24 @@ var relative_mouse_position = Vector2()
 const SPEED_MULTIPLYER = 1.0
 const ACCELERATION = 5.0
 const DECELLERATION = 5.0
-var won = false
+export var won = false
+
+var treasure1 = false
+var treasure2 = false
 
 signal player(player_data)
-signal next_level(next_level_data)
+signal setup_win(next_level_data, treasure1_data, treasure2_data)
+
+func _on_submit_treasure(treasue1_data, treasue2_data):
+	treasure1 = treasue1_data
+	treasure2 = treasue2_data
 
 func _on_camera_reset():
 	self.position.x = MIN_X
 
 func _on_win():
 	won = true
+	emit_signal("setup_win", next_level, treasure1, treasure2)
 	win_splashscreen.show()
 
 func _physics_process(_delta):
@@ -98,5 +106,4 @@ func _ready():
 	target_last_tick = x_follow_target.position
 	connect("player", pause_menu, "_on_player")
 	emit_signal("player", player)
-	connect("next_level", win_splashscreen, "_on_next_level")
-	emit_signal("next_level", next_level)
+	connect("setup_win", win_splashscreen, "_on_setup_win")

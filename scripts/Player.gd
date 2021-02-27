@@ -47,15 +47,27 @@ var spawn_x
 var y_out_of_screen = Vector2(-100, 700)
 export var accept_previous_checkpoints = true
 export(NodePath) onready var camera = $"../Camera"
-var win = false
+export var win = false
 
 onready var animation_player = $"AnimatedSprite"
 const ANIMATION_THRESHOLD = 0.5
 
+var treasure1 = false
+var treasure2 = false
+#onready var 
+
 signal camera_reset()
+signal submit_treasure(treasure1_data, treasure2_data)
+
+func _on_treasureCollected(id_data):
+	if id_data == 0:
+		treasure1 = true
+	elif id_data == 1:
+		treasure2 = true
 
 func _on_win():
 	win = true
+	emit_signal("submit_treasure", treasure1, treasure2)
 
 func _on_resume():
 	paused = false
@@ -113,6 +125,7 @@ func _ready():
 	update_acting_vars()
 	spawn_x = self.position.x
 	connect("camera_reset", camera, "_on_camera_reset")
+	connect("submit_treasure", camera, "_on_submit_treasure")
 	animation_player.play()
 
 func input():

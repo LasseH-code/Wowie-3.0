@@ -20,7 +20,8 @@ func _on_logic_passon(logic_data, id_data):
 		logic = logic_data
 
 func _on_Area2D_body_entered(body):
-	if !do_logic:
-		emit_signal("win")
-	elif logic:
-		emit_signal("win")
+	if body == player:
+		if !do_logic:
+			emit_signal("win")
+		elif logic:
+			emit_signal("win")

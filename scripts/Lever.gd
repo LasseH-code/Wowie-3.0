@@ -24,7 +24,7 @@ func _ready():
 	connect("logic", logic_reciever, "_on_logic")
 
 func _input(_event):
-	if Input.is_action_pressed("interact") and interactable:
+	if Input.is_action_just_pressed("interact") and interactable:
 		active = !active
 		emit_signal("logic", active, id)
 		flick_lever()
