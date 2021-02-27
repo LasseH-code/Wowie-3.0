@@ -3,6 +3,7 @@ extends Node2D
 signal kill()
 
 export(NodePath) onready var player = $"../../Player"
+
 onready var kill_area1 = $"Spike/KillArea"
 onready var kill_area2 = $"Spike2/KillArea"
 onready var kill_area3 = $"Spike3/KillArea"

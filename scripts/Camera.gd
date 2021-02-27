@@ -24,6 +24,9 @@ var won = false
 signal player(player_data)
 signal next_level(next_level_data)
 
+func _on_camera_reset():
+	self.position.x = MIN_X
+
 func _on_win():
 	won = true
 	win_splashscreen.show()

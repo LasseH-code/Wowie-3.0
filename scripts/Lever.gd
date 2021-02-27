@@ -5,21 +5,29 @@ onready var interaction_area = $"InteractionArea"
 onready var input_prompt = $"InputPrompt"
 
 export(NodePath) onready var player = $"../../Player"
-export(NodePath) onready var logic_reciever = $"../"
+onready var logic_reciever = $"../../LogicReciever"
+export(int) var id = -1
 
 var interactable = false
 export(bool) var active = false
 
-signal logic(logic_data)
+signal logic(logic_data, id_data)
+
+func flick_lever():
+	if active:
+		lever_joint.rotation_degrees = 38
+	else:
+		lever_joint.rotation_degrees = -38
 
 func _ready():
 	interaction_area.monitoring = true
 	connect("logic", logic_reciever, "_on_logic")
 
-func _input(event):
-	if Input.is_action_pressed("interact"):
+func _input(_event):
+	if Input.is_action_pressed("interact") and interactable:
 		active = !active
-		emit_signal("logic", active)
+		emit_signal("logic", active, id)
+		flick_lever()
 
 func _on_InteractionArea_body_entered(body):
 	if body == player:

@@ -43,10 +43,16 @@ var sprint = Input.is_action_pressed("sprint")
 
 var checkpoint_id = -1
 var respawn_coordinates_x
+var spawn_x
 var y_out_of_screen = Vector2(-100, 700)
 export var accept_previous_checkpoints = true
 export(NodePath) onready var camera = $"../Camera"
 var win = false
+
+onready var animation_player = $"AnimatedSprite"
+const ANIMATION_THRESHOLD = 0.5
+
+signal camera_reset()
 
 func _on_win():
 	win = true
@@ -77,7 +83,11 @@ func respawn():
 		self.position.y = y_out_of_screen.x
 		dead = false
 	else:
-		get_tree().reload_current_scene()
+		self.position.x = spawn_x
+		self.position.y = y_out_of_screen.x
+		emit_signal("camera_reset")
+		dead = false
+		#get_tree().reload_current_scene()
 
 func teleport_to(to):
 	self.position = to
@@ -101,6 +111,9 @@ func _ready():
 	coyote_timer.one_shot = true
 	coyote_timer.wait_time = coyote_jump
 	update_acting_vars()
+	spawn_x = self.position.x
+	connect("camera_reset", camera, "_on_camera_reset")
+	animation_player.play()
 
 func input():
 	right = Input.is_action_pressed("move_right")
@@ -147,7 +160,19 @@ func _input(_event):
 	if Input.is_action_just_released("ui_cancel"):
 		paused = !paused
 
+func animation_playback():
+	if velocity.x >= ANIMATION_THRESHOLD:
+		animation_player.animation = "walk_right"
+		animation_player.play()
+	elif velocity.x <= -ANIMATION_THRESHOLD:
+		animation_player.animation = "walk_left"
+		animation_player.play()
+	else:
+		#animation_player.stop()
+		pass
+
 func _physics_process(delta):
+	animation_playback()
 	out_of_bounds_teleport()
 	velocity.y += acting_gravity * delta
 	input()
