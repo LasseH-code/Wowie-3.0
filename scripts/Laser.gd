@@ -26,6 +26,13 @@ func _on_logic_passon(logic_data, id_data):
 func _ready():
 	connect("kill", player, "_on_kill")
 	kill_area.monitoring = true
+	if do_logic:
+		if logic:
+			laser_on.show()
+			laser_off.hide()
+		else:
+			laser_on.hide()
+			laser_off.show()
 
 func _on_KillArea_body_entered(body):
 	if do_logic:

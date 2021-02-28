@@ -21,4 +21,12 @@ func _on_logic_passon(logic_data, id_data):
 			collision.disabled = true
 
 func _ready():
-	pass
+	if do_logic:
+		if !logic:
+				closed.visible = true
+				open.visible = false
+				collision.disabled = false
+		else:
+			closed.visible = false
+			open.visible = true
+			collision.disabled = true

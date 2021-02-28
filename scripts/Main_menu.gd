@@ -12,7 +12,7 @@ func _on_Continue_pressed():
 	pass # Replace with function body.
 
 func _on_New_Game_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene("res://_sc/level/level0.tscn")
 
 func _on_Options_pressed():
 	pass # Replace with function body.

@@ -55,12 +55,15 @@ __meta__ = {
 }
 
 [node name="E" type="Label" parent="InputPrompt"]
-margin_left = 48.0
-margin_top = -88.0
-margin_right = 179.0
-margin_bottom = -32.0
+margin_left = -2.5108
+margin_top = -85.1938
+margin_right = 128.489
+margin_bottom = -29.1938
 custom_fonts/font = SubResource( 4 )
 text = "Press E"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 16, -5.96046e-08 )

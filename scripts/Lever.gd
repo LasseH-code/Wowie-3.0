@@ -22,6 +22,7 @@ func flick_lever():
 func _ready():
 	interaction_area.monitoring = true
 	connect("logic", logic_reciever, "_on_logic")
+	flick_lever()
 
 func _input(_event):
 	if Input.is_action_just_pressed("interact") and interactable:
