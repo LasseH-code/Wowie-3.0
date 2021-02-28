@@ -24,7 +24,7 @@ mesh = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-rotation = 1.5708
+rotation = 3.14159
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 

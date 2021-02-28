@@ -1,8 +1,11 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/slime-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://assets/player/slime-Sheet2.png" type="Texture" id=3]
+[ext_resource path="res://assets/sounds/GameOver_01.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/Jump_05.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/Powerup_01.wav" type="AudioStream" id=6]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0, 0.717647, 0.0313726, 1 )
@@ -131,3 +134,15 @@ position = Vector2( 0, 2.4 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 24 )
 animation = "walk_right"
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -13.53
+
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -18.825
+
+[node name="Checkpoint" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -20.383

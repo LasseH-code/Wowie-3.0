@@ -3,6 +3,7 @@ extends Node2D
 signal kill()
 
 export(NodePath) onready var player = $"../../Player"
+onready var death_particles = $DeathParticles/CPUParticles2D
 
 onready var kill_area1 = $"Spike/KillArea"
 onready var kill_area2 = $"Spike2/KillArea"
@@ -18,4 +19,5 @@ func _ready():
 
 func _on_KillArea_body_entered(body):
 	if body == player:
+		death_particles.emitting = true
 		emit_signal("kill")

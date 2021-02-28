@@ -56,6 +56,10 @@ var treasure1 = false
 var treasure2 = false
 #onready var 
 
+onready var jump_sound = $Jump#.stream as AudioStreamOGGVorbis
+onready var death_sound = $Death#.stream as AudioStreamOGGVorbis
+onready var checkpoint_sound = $Checkpoint
+
 signal camera_reset()
 signal submit_treasure(treasure1_data, treasure2_data)
 
@@ -73,6 +77,7 @@ func _on_resume():
 	paused = false
 
 func _on_kill():
+	death_sound.play()
 	dead = true
 
 func _on_checkpoint(id_data, x_data):
@@ -83,6 +88,7 @@ func _on_checkpoint(id_data, x_data):
 		else:
 			checkpoint_id = id_data
 			respawn_coordinates_x = x_data
+			checkpoint_sound.play()
 
 func dead():
 	dead = true
@@ -127,6 +133,8 @@ func _ready():
 	connect("camera_reset", camera, "_on_camera_reset")
 	connect("submit_treasure", camera, "_on_submit_treasure")
 	animation_player.play()
+	#jump_sound.set_loop(false)
+	#death_sound.set_loop(false)
 
 func input():
 	right = Input.is_action_pressed("move_right")
@@ -165,6 +173,8 @@ func applyFriction():
 func performJump():
 	if dead != true and paused != true and win != true:
 		jump = Input.is_action_just_pressed("jump")
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			jump_sound.play()
 	if jump && is_on_floor() || jump && coyote_timer.time_left > 0.0:
 			velocity.y = -acting_jump_height
 			coyote_timer.stop()
@@ -187,7 +197,8 @@ func animation_playback():
 func _physics_process(delta):
 	animation_playback()
 	out_of_bounds_teleport()
-	velocity.y += acting_gravity * delta
+	if dead != true and paused != true:
+		velocity.y += acting_gravity * delta
 	input()
 	applyFriction()
 	performJump()

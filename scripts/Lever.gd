@@ -10,6 +10,7 @@ export(int) var id = -1
 
 var interactable = false
 export(bool) var active = false
+onready var switching_sound = $Switching
 
 signal logic(logic_data, id_data)
 
@@ -28,6 +29,7 @@ func _input(_event):
 	if Input.is_action_just_pressed("interact") and interactable:
 		active = !active
 		emit_signal("logic", active, id)
+		switching_sound.play()
 		flick_lever()
 
 func _on_InteractionArea_body_entered(body):

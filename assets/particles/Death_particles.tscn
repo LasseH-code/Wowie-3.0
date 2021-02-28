@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="DeathParticles" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 52
+lifetime = 2.19
+one_shot = true
+speed_scale = 2.07
+explosiveness = 0.5
+gravity = Vector2( 0, 50 )
+initial_velocity = 89.89
+color = Color( 1, 0, 0, 1 )

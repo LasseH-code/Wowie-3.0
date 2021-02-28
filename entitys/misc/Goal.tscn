@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Goal.gd" type="Script" id=1]
 [ext_resource path="res://assets/misc/Laterne, Laterne,Sonne, Mond und Sterne..png" type="Texture" id=2]
 [ext_resource path="res://assets/particles/Goal_particles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sounds/Powerup_01.wav" type="AudioStream" id=4]
 
 [sub_resource type="SphereMesh" id=1]
 radius = 32.0
@@ -29,5 +30,9 @@ shape = SubResource( 2 )
 position = Vector2( 0, -3.335 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
+
+[node name="Collect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -16.082
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

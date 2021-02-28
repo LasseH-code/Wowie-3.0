@@ -9,6 +9,7 @@ export(bool) var do_logic = false
 export(bool) var logic = false
 export(int) var logic_id = -1
 
+
 signal checkpoint(id_data, x_data)
 
 func _on_logic_passon(logic_data, id_data):

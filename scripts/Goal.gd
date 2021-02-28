@@ -7,6 +7,7 @@ onready var camera = $"../../Camera"
 export(bool) var do_logic = false
 export(bool) var logic = false
 export(int) var logic_id = -1
+onready var collect_sound = $Collect
 
 signal win()
 
@@ -25,4 +26,5 @@ func _on_Area2D_body_entered(body):
 			emit_signal("win")
 		elif logic:
 			emit_signal("win")
+		collect_sound.play()
 		self.hide()
