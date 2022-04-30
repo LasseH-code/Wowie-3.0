@@ -31,7 +31,7 @@ tile_data = PoolIntArray( 327705, 1, 0, 327706, 0, 0, 327707, 0, 0, 327708, 0, 0
 [node name="Spike Wall" parent="Spikes" instance=ExtResource( 5 )]
 position = Vector2( 584, 496 )
 
-[node name="Sprite" parent="Spikes/Spike Wall" index="5"]
+[node name="Sprite" parent="Spikes/Spike Wall" index="6"]
 visible = false
 
 [node name="Spike Wall2" parent="Spikes" instance=ExtResource( 5 )]
@@ -179,4 +179,5 @@ margin_bottom = -97.8456
 rect_scale = Vector2( 1.145, 1.205 )
 
 [editable path="Spikes/Spike Wall"]
+[editable path="Spikes/Spike Wall/DeathParticles"]
 [editable path="Camera"]

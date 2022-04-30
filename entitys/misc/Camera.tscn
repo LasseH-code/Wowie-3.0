@@ -5,13 +5,13 @@
 [ext_resource path="res://_sc/ui/Win_splashscreen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/shader/Crt.shader" type="Shader" id=4]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
 shader_param/scan_line_count = 250.0
-shader_param/r_offset = 0.0
-shader_param/g_offset = 0.0
-shader_param/b_offset = 0.0
-shader_param/scanline_opacity = 0.15
+shader_param/r_offset = 1.163
+shader_param/g_offset = 2.244
+shader_param/b_offset = -2.593
+shader_param/scanline_opacity = 0.25
 
 [node name="Camera" type="Camera2D"]
 script = ExtResource( 1 )
@@ -20,7 +20,7 @@ script = ExtResource( 1 )
 follow_viewport_enable = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-material = SubResource( 2 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1.7818

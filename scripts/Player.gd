@@ -8,6 +8,7 @@ export var air_friction = 0.0
 export var max_speed = 0.0
 export var max_sprint_speed = 0.0
 export var gravity = 0.0
+export var terminal_velocity = 0.0
 
 export var jump_height_mul = 1.0
 export var acceleration_mul = 1.0
@@ -17,6 +18,7 @@ export var air_friction_mul = 1.0
 export var max_speed_mul = 1.0
 export var max_sprint_speed_mul = 1.0
 export var gravity_mul = 1.0
+export var terminal_velocity_mul = 1.0
 
 var acting_jump_height = 0.0
 var acting_acceleration = 0.0
@@ -26,6 +28,7 @@ var acting_air_friction = 0.0
 var acting_max_speed = 0.0
 var acting_max_sprint_speed = 0.0
 var acting_gravity = 0.0
+var acting_terminal_velocity = 0.0
 
 const UP = Vector2(0, -1)
 const coyote_jump = 0.1
@@ -123,6 +126,7 @@ func update_acting_vars():
 	acting_max_speed = max_speed * max_speed_mul
 	acting_max_sprint_speed = max_sprint_speed * max_sprint_speed_mul
 	acting_gravity = gravity * gravity_mul
+	acting_terminal_velocity = terminal_velocity * terminal_velocity_mul
 
 func _ready():
 	self.add_child(coyote_timer)
@@ -203,6 +207,8 @@ func _physics_process(delta):
 	applyFriction()
 	performJump()
 	velocity.normalized()
+	if velocity.y < -acting_terminal_velocity:
+		velocity.y = acting_terminal_velocity
 	if dead != true and paused != true:
 		velocity = move_and_slide(velocity, UP)
 	elif dead:

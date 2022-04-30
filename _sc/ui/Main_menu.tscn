@@ -1,9 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/fonts/title_super.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/Main_menu.gd" type="Script" id=2]
 [ext_resource path="res://_sc/level/level1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/misc/Play_button.png" type="Texture" id=4]
+[ext_resource path="res://assets/shader/Crt.shader" type="Shader" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 5 )
+shader_param/scan_line_count = 250.0
+shader_param/r_offset = 1.163
+shader_param/g_offset = 2.244
+shader_param/b_offset = -2.593
+shader_param/scanline_opacity = 0.25
 
 [node name="Main Menu" type="Control"]
 anchor_right = 1.0
@@ -97,6 +106,22 @@ margin_right = 210.0
 margin_bottom = 68.0
 disabled = true
 text = "Options"
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+visible = false
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -2.0
+margin_right = 465.0
+margin_bottom = 224.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="CanvasLayer/Control/SkipTutorial" to="." method="_on_TestWorld_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Play!" to="." method="_on_New_Game_pressed"]
